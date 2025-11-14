@@ -2,7 +2,7 @@ import pygame
 
 
 class Game:
-    def __init__(self, screen_width: int = 800, screen_height: int = 600, fps: int = 60, lives: int = 3, nivel: int = 1, font_size: int = 36, caption: str = "Space Invader"):
+    def __init__(self, screen_width: int = 800, screen_height: int = 600, fps: int = 60, lives: int = 3, nivel: int = 1, font_size: int = 36, caption: str = "Space Invader", image=None):
 
         # Dimensiones y ventana
         self.screen_width = screen_width
@@ -16,7 +16,7 @@ class Game:
         # Estado dinámico
         self.bullets = 0
         self.contador = 0  # contador de frames
-
+        self.bullets_image =image
         # Reloj
         self.clock = pygame.time.Clock()
 
@@ -79,7 +79,9 @@ class Game:
         tiempo_segundos = self.contador // self.fps
         tiempo_label = self.font.render(f'Tiempo: {tiempo_segundos}s', True, (255, 255, 255))
         self.window.blit(tiempo_label, (self.screen_width - 200, 10))
-
+        for i in range(self.bullets):
+            offset += self.bullets_image.get_width()
+            self.window.blit(self.bullets_image,(self.screen_width-offset,self.screen_height-50))
 
             
     
