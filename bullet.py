@@ -4,9 +4,14 @@ class Bullet:
         self.x = x
         self.y = y
         self.img = img
+        # Si la imagen es None, crear una superficie simple como fallback
+        if self.img is None:
+            self.img = pygame.Surface((8, 16), pygame.SRCALPHA)
+            pygame.draw.circle(self.img, (255, 215, 0), (4, 8), 3)
         self.mask = pygame.mask.from_surface(self.img)
     def draw(self, window):
-        window.blit(self.img, (self.x, self.y))
+        if self.img:
+            window.blit(self.img, (self.x, self.y))
     def move(self, speed):
         self.y += speed
     def collision(self, obj):
